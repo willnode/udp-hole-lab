@@ -14,6 +14,11 @@ server.on('message', (msg, rinfo) => {
   if (msg.toString().trim() == 'LIST') {
     server.send(JSON.stringify(serversMap), rinfo.port, rinfo.address)
   }
+  if (msg.toString().trim() == 'FEEDME') {
+      setInterval(() => {
+        server.send('p', rinfo.port, rinfo.address)
+      }, 2000)
+  }
   console.log(`server got: ${JSON.stringify(msg.toString().trim())} from ${rinfo.address}:${rinfo.port}`);
 });
 
